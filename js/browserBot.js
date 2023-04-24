@@ -583,29 +583,33 @@ function appendLogOutput(type, content) {
 }
 
 
+var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
 function getTextFromUrl(url, timeout = 5000) {
-    // 创建一个超时Promise
+    // 创建一个超时 Promise
     const timeoutPromise = new Promise((_, reject) => {
       setTimeout(() => {
         reject(new Error('timeout'));
       }, timeout);
     });
-    if (url.includes('http://')){
-        url = 'https://cors-anywhere.herokuapp.com/' + url
-    };
-    // 使用fetch获取文本
-    const fetchPromise = fetch(url)
-      .then(response => {
-        if (!response.ok) {
-            throw new Error(`fetch error`);
-        }
-        return response.json();
-      })
-      .then(jsonData => {
-        return jsonData.message;
-      });
   
-    return Promise.race([fetchPromise, timeoutPromise])
+    // 使用 XMLHttpRequest 获取文本
+    const xhrPromise = new Promise((resolve, reject) => {
+      var x = new XMLHttpRequest();
+      x.open('GET', cors_api_url + url);
+      x.onload = function () {
+        if (x.status >= 200 && x.status < 400) {
+          resolve(JSON.parse(x.responseText).message);
+        } else {
+          reject(new Error(`fetch error`));
+        }
+      };
+      x.onerror = function () {
+        reject(new Error(`fetch error`));
+      };
+      x.send();
+    });
+  
+    return Promise.race([xhrPromise, timeoutPromise])
       .catch(error => {
         if (error.message === 'timeout') {
           return 'Timeout error: ' + error.message;
@@ -613,7 +617,7 @@ function getTextFromUrl(url, timeout = 5000) {
           return 'Fetch error: ' + error.message;
         }
       });
-}
+ }
 
 
 document.addEventListener('DOMContentLoaded', function () {
