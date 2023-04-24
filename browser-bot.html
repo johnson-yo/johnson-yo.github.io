@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser-Bot</title>
+    <script src="js/browserBot.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border-bottom: 1px solid #000;
+        }
+
+        #header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        #header small {
+            font-size: 12px;
+        }
+
+        #header a {
+            text-decoration: none;
+            color: #000;
+        }
+
+
+        #config-content{
+            background-color: #f0f0f0;
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 0 20px;
+        }
+
+        .config-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .config-row input {
+            width: 60%;
+            min-width: 50px;
+        }
+
+        .config-row select {
+            max-width: 60%;
+            
+        }
+
+        .config-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .stt-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        #stt {
+            margin: 20px;
+        }
+
+        #stt h2 {
+            font-size: 18px;
+        }
+
+        #stt textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+        #stt button {
+            display: block;
+            margin-top: 10px;
+        }
+
+        #tts {
+            margin: 20px;
+        }
+
+        #tts h2 {
+            font-size: 18px;
+        }
+
+        #tts textarea {
+            width: 100%;
+            height: 60px;
+        }
+
+        #tts button {
+            display: block;
+            margin-top: 10px;
+        }
+
+        #log {
+            margin: 20px;
+        }
+
+        #log h2 {
+            font-size: 18px;
+            display: inline;
+        }
+
+        #log textarea {
+            width: 100%;
+            height: 200px;
+            display: block;
+            margin-top: 10px;
+        }
+
+        #log button {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <h1>Browser-Bot <small> power by Web Speech API</small></h1>
+
+        <a href="https://github.com/" target="_blank">[Github]</a>
+    </div>
+
+    <div id="config">
+        <button id="configButton" style='margin:10px 0px 0px 20px;'>[ <u>CONFIG</u> ]</button>
+        <div id="config-content" tyle="display: none;">
+            <div class="config-row">
+                <label for="restUrl">REST URL:</label>
+                <input type="text" id="restUrl">
+            </div>
+            STT:
+            <div class="config-row">
+                <label for="sttLanguage">Language:</label>
+                <select id="sttLanguage"></select>
+            </div>
+            TTS:
+            <div class="config-row">
+                <label for="ttsVoice1">Voice1:</label>
+                <input type="text" id="ttsVoice1">
+                <select id="ttsVoice1Select"></select>
+            </div>
+            <div class="config-row">
+                <label for="ttsVoice2">Voice2:</label>
+                <input type="text" id="ttsVoice2">
+                <select id="ttsVoice2Select"></select>
+            </div>
+            <div class="config-row">
+                <label for="ttsVoice3">Voice3:</label>
+                <input type="text" id="ttsVoice3">
+                <select id="ttsVoice3Select"></select>
+            </div>
+            <div class="config-row">
+                <label for="ttsVoice4">Voice4:</label>
+                <input type="text" id="ttsVoice4">
+                <select id="ttsVoice4Select"></select>
+            </div>
+            <div class="config-row">
+                <label for="ttsVolume">TTS Volume(0~1)</label>
+                <input type="text" id="ttsVolume">
+            </div>
+            <div class="config-row">
+                <label for="ttsRate">TTS Rate(0.1~2)</label>
+                <input type="text" id="ttsRate">
+            </div>
+            <div class="config-row">
+                <label for="ttsPitch">TTS Pitch(0~2)</label>
+                <input type="text" id="ttsPitch">
+            </div>
+            Other:
+            <div class="config-row">
+                <label for="stt">STT Timeout(s):</label>
+                <input type="text" id="sttTimeout">
+            </div>
+            <div class="config-row">
+                <label for="sttHotwords">STT HotWords(;):</label>
+                <input type="text" id="sttHotwords">
+            </div>
+            <div class="config-row">
+                <label for="sttAnswers">STT AnswerWords(;):</label>
+                <input type="text" id="sttAnswers">
+            </div>
+            <div class="config-row">
+                <label for="sttConfirms">STT ConfirmWords(;):</label>
+                <input type="text" id="sttConfirms">
+            </div>
+            <div class="config-row">
+                <label for="sttNoWords">STT CancelWords(;):</label>
+                <input type="text" id="sttNoWords">
+            </div>
+            <div class="config-buttons">
+                <button id="commit">COMMIT</button>
+                <button id="reset">RESET</button>
+                <button id="export">EXPORT</button>
+                <button id="import">IMPORT</button>
+            </div>
+        </div>
+    </div>
+    <div id="stt">
+        <h2>STT:</h2>
+        <textarea id="sttOutput" rows="5" cols="50"></textarea>
+        <span id="sttStatus" style="font-style: italic;">status</span>
+        <div class="stt-buttons">
+            <button id="listenHotword">LISTEN(hotword)</button>
+            <button id="listenCommand">LISTEN(command)</button>
+            <button id="stop">STOP</button>
+            <button id="send">SEND</button>
+        </div>
+    </div>
+    <div id="tts">
+        <h2>TTS:</h2>
+        <textarea id="ttsInput" rows="3" cols="50"></textarea>
+        <button id="speak">SPEAK</button>
+    </div>
+    <div id="log">
+        <h2>LOG:</h2>
+        <button id="clean">CLEAN</button>
+        <button id="save">SAVE</button>
+        <textarea id="logOutput" rows="15" cols="60"></textarea>
+    </div>
+
+    </div>
+</body>
+
+</html>
