@@ -590,7 +590,9 @@ function getTextFromUrl(url, timeout = 5000) {
         reject(new Error('timeout'));
       }, timeout);
     });
-  
+    if (url.includes('http://')){
+        url = 'https://cors-anywhere.herokuapp.com/' + url
+    };
     // 使用fetch获取文本
     const fetchPromise = fetch(url)
       .then(response => {
