@@ -37,7 +37,7 @@
         }
 
 
-        #config-content{
+        #configContent {
             background-color: #f0f0f0;
             border: 1px solid #000;
             padding: 10px;
@@ -140,7 +140,7 @@
 
     <div id="config">
         <button id="configButton" style='margin:10px 0px 0px 20px;'>[ <u>CONFIG</u> ]</button>
-        <div id="config-content" tyle="display: none;">
+        <div id="configContent">
             <div class="config-row">
                 <label for="restUrl">REST URL:</label>
                 <input type="text" id="restUrl">
@@ -204,11 +204,27 @@
                 <label for="sttNoWords">STT CancelWords(;):</label>
                 <input type="text" id="sttNoWords">
             </div>
+            <div class="config-row">
+                <label for="gptApiKey">GPT OpanAI API(option):</label>
+                <input type="text" id="gptApiKey">
+            </div>
+            <div class="config-row">
+                <label for="gptSystemRole">GPT System Role(option):</label>
+                <input type="text" id="gptSystemRole">
+            </div>
+            <div class="config-row">
+                <label for="gptTokenLimit">GPT Token Limit(option):</label>
+                <input type="text" id="gptTokenLimit">
+            </div>
+            <div class="config-row">
+                <label for="gptReplyLanguage">GPT Reply Language(option):</label>
+                <input type="text" id="gptReplyLanguage">
+            </div>   
             <div class="config-buttons">
-                <button id="commit">COMMIT</button>
-                <button id="reset">RESET</button>
-                <button id="export">EXPORT</button>
-                <button id="import">IMPORT</button>
+                <button id="commitButton">COMMIT</button>
+                <button id="resetButton">RESET</button>
+                <button id="exportButton">EXPORT</button>
+                <button id="importButton">IMPORT</button>
             </div>
         </div>
     </div>
@@ -217,21 +233,21 @@
         <textarea id="sttOutput" rows="5" cols="50"></textarea>
         <span id="sttStatus" style="font-style: italic;">status</span>
         <div class="stt-buttons">
-            <button id="listenHotword">LISTEN(hotword)</button>
-            <button id="listenCommand">LISTEN(command)</button>
-            <button id="stop">STOP</button>
-            <button id="send">SEND</button>
+            <button id="listenHotwordButton">LISTEN(hotword)</button>
+            <button id="listenCommandButton">LISTEN(command)</button>
+            <button id="stopButton">STOP</button>
+            <button id="sendButton">SEND</button>
         </div>
     </div>
     <div id="tts">
         <h2>TTS:</h2>
         <textarea id="ttsInput" rows="3" cols="50"></textarea>
-        <button id="speak">SPEAK</button>
+        <button id="speakButton">SPEAK</button>
     </div>
     <div id="log">
         <h2>LOG:</h2>
-        <button id="clean">CLEAN</button>
-        <button id="save">SAVE</button>
+        <button id="cleanButton">CLEAN</button>
+        <button id="saveButton">SAVE</button>
         <textarea id="logOutput" rows="15" cols="60"></textarea>
     </div>
 
