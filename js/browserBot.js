@@ -41,7 +41,7 @@ conf['ttsVoice1'] = 'en';
 conf['ttsVolume'] = '1';
 conf['ttsRate'] = '1';
 conf['sttTimeout'] = '5';
-conf['gptApiKey'] = 'sk-'
+conf['gptApiKey'] = ''
 conf['gptSystemRole'] = 'If the generated sentence contains more than one language, using language codes like [zh], [jp], and [en]. For example: [zh]中文的“你好”用日文应该是[jp]“こんにちは”，[zh]请跟我读一次。Include only [zh], [jp], and [en] language codes.';
 conf['gptTokenLimit'] = '100';
 console.log(ele);
