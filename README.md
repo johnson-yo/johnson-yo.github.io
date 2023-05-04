@@ -1,15 +1,16 @@
 # Browser-Bot
 
-Browser-Bot is a powerful web application that leverages the Web Speech API to provide speech-to-text (STT) and text-to-speech (TTS) capabilities. It is designed to be highly configurable, making it suitable for a wide range of applications and use cases. With additional features like GPT support, this app becomes a versatile and powerful tool for voice-based interaction.
+Browser-Bot is a powerful web application that leverages the Web Speech API to provide speech-to-text (STT) and text-to-speech (TTS) capabilities without the need for installing any additional apps or extensions. It is designed to be highly configurable, making it suitable for a wide range of applications and use cases. With additional features like GPT support, this app becomes a versatile and powerful tool for voice-based interaction on both Android and iOS smartphones, effectively turning older devices into AI assistants.
 
 ## Features
 
-- Speech-to-Text (STT) support
+- Speech-to-Text (STT) support with hotword activation
 - Text-to-Speech (TTS) support
 - Configurable STT language, TTS voices, and parameters
-- GPT OpenAI API integration (optional)
+- GPT OpenAI API integration (optional) or your own REST API server
 - Export and import configuration settings
 - Log management and saving
+- Compatible with Android and iOS mobile browsers
 
 ## Usage
 
