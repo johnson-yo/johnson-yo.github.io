@@ -1,4 +1,6 @@
 // Auth: Johnson Yo
+// Date: 2023/05/04
+// Email: you.archi.2017@gmail.com
 
 // create ids list
 const config_ids = [
