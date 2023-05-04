@@ -38,7 +38,7 @@ This input will generate speech in the following order:
 
 1. An English sentence: "Hello, this is an English sentence."
 2. A Chinese sentence: "你好，这是一句中文。"
-3. A Japanese sentence: "こんにちは、これは日本語の文です。"
+3. A Japanese sentence: "こんにちは、これは日本語です。"
 
 Make sure to configure the appropriate TTS voices for each language using the `Voice1`, `Voice2`, `Voice3`, and `Voice4` settings in the user interface.
 
@@ -48,9 +48,9 @@ Browser-Bot relies on the Web Speech API, which is not supported by all browsers
 
 ## REST API URL Format:
 
-The REST API URL is formed by concatenating the `restUrl` configuration value with the `query` value.
+The REST API URL is formed by concatenating the `REST URL` configuration value with the `query` value.
 
-To create a valid REST API URL, the `restUrl` value should be a properly formatted base URL (e.g., `https://example.com/api/`). The `query` value will be appended to this base URL.
+To create a valid REST API URL, the `REST URL` value should be a properly formatted base URL (e.g., `https://example.com/api/`). The `query` value will be appended to this base URL, like `https://example.com/api/{query}`.
 
 ## Response Format:
 
