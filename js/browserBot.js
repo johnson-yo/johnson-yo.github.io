@@ -31,9 +31,18 @@ config_ids.concat(other_ids).forEach(function (id) { ele[id] = document.getEleme
 const conf = {};
 config_ids.forEach(function (id) { conf[id] = ''; });
 // preset config variables
+conf['restUrl'] = 'https://example.com/api/';
+conf['sttLanguage'] = 'en-US';
+conf['sttHotwords'] = "hello;";
+conf['sttAnswers'] = "what's up;";
+conf['sttConfirms'] = "You said;";
+conf['sttNoWords'] = "No;stop;cancel;";
+conf['ttsVoice1'] = 'en';
 conf['ttsVolume'] = '1';
 conf['ttsRate'] = '1';
 conf['sttTimeout'] = '5';
+conf['gptApiKey'] = 'sk-'
+conf['gptSystemRole'] = 'If the generated sentence contains more than one language, using language codes like [zh], [jp], and [en]. For example: [zh]中文的“你好”用日文应该是[jp]“こんにちは”，[zh]请跟我读一次。Include only [zh], [jp], and [en] language codes.';
 conf['gptTokenLimit'] = '100';
 console.log(ele);
 console.log(conf);
@@ -597,16 +606,13 @@ function appendLogOutput(type, content) {
 }
 
 
-
 function getTextFromUrl(url, timeout = 5000) {
-    // 创建一个超时 Promise
     let timeoutPromise = new Promise((_, reject) => {
         setTimeout(() => {
             reject(new Error('timeout'));
         }, timeout);
     });
-
-    // 使用 XMLHttpRequest 获取文本
+    // handle GET with cors-anywhere
     let xhrPromise = new Promise((resolve, reject) => {
         let cors_api_url = 'https://cors-anywhere.herokuapp.com/';
         let x = new XMLHttpRequest();
