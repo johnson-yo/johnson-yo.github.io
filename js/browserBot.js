@@ -667,7 +667,7 @@ async function askChatGPT(userMsg) {
         'n': 1,
         'top_p': 1,
         'stream': false,
-        'max_tokens': 2000,
+        'max_tokens': parseInt(conf['gptTokenLimit']),
     };
     console.log('header:',headers);
     console.log('data:',data);
