@@ -616,11 +616,16 @@ function getTextFromUrl(url, timeout = 5000) {
     // handle GET with cors-anywhere
     let xhrPromise = new Promise((resolve, reject) => {
         let cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+        if (url.startsWith('http://')) {
+            url = cors_api_url + url
+        }
         let x = new XMLHttpRequest();
-        x.open('GET', cors_api_url + url);
+        console.log('url: ', url);
+        x.open('GET', url);
         x.onload = function () {
             if (x.status >= 200 && x.status < 400) {
-                resolve(JSON.parse(x.responseText).message);
+                resolve(x.responseText);
+                //resolve(JSON.parse(x.responseText).message);
             } else {
                 reject(new Error(`fetch error`));
             }
